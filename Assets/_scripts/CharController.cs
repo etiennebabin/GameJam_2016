@@ -10,6 +10,7 @@ public class CharController : MonoBehaviour {
     private bool char_activated = false;
     private Rigidbody body;
     private Light char_spotlight;
+    private GameObject head;
 
     // Use this for initialization
     void Start () {
@@ -18,6 +19,8 @@ public class CharController : MonoBehaviour {
 
         char_spotlight = char_light.GetComponent<Light>();
         char_spotlight.enabled = false;
+
+        head = this.transform.Find("Sphere").gameObject;
     }
 	
 	// Update is called once per frame
@@ -26,7 +29,10 @@ public class CharController : MonoBehaviour {
 
         if (char_activated)
         {
-            // inti dsgsdfgsfasfasdf
+            Vector3 stick_force = new Vector3(-5 * currentState.ThumbSticks.Left.X, 0.0f, -4 * currentState.ThumbSticks.Left.Y);
+            body.AddForceAtPosition(stick_force, head.transform.position);
+            //body.AddForce(stick_force);
+
         }
         else
         {
