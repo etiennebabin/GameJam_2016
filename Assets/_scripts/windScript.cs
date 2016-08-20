@@ -3,7 +3,7 @@ using System.Collections;
 
 public class windScript : MonoBehaviour {
 
-    public float wind_force;
+    public Vector3 wind_force;
     public GameObject char1, char2, char3;
 
     private GameObject head1, head2, head3;
@@ -17,7 +17,10 @@ public class windScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        char3.GetComponent<Rigidbody>().AddForceAtPosition(new Vector3(wind_force, 0.0f, 0.0f), head3.transform.position);
+	void Update ()
+    {
+        char1.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head1.transform.position);
+        char2.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head2.transform.position);
+        char3.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head3.transform.position);
     }
 }
