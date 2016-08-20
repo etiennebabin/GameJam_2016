@@ -3,12 +3,15 @@ using System.Collections;
 
 public class windScript : MonoBehaviour {
 
-    public Vector3 wind_force;
+    public GameObject girouette;
     public GameObject char1, char2, char3;
     public float fBlowForce;
 
+
     public GameObject wind_particles;
 
+    private Vector3 girouette_direction;
+    private Vector3 wind_force;
     private GameObject head1, head2, head3;
 
 	// Use this for initialization
@@ -25,6 +28,9 @@ public class windScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        //girouette_direction = girouette.transform.forward;
+        //wind_force = Vector3.Normalize(girouette_direction) * fBlowForce;
+
         char1.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head1.transform.position);
         char2.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head2.transform.position);
         char3.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head3.transform.position);
@@ -43,5 +49,6 @@ public class windScript : MonoBehaviour {
             wind_particles.GetComponent<ParticleSystem>().playbackSpeed = wind_particles.GetComponent<ParticleSystem>().playbackSpeed <= 1.0f ? 1.0f : wind_particles.GetComponent<ParticleSystem>().playbackSpeed - 0.2f;
             fBlowForce = p_fBlowForce;
         }
+
     }
 }
