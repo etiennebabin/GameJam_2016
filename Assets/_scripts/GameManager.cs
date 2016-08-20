@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     private int nb_players = 0;
     private int nb_active_players = 0;
-    private float timer_duration;
+    public float timer_duration;
 
     private GUIText countdown_text;
 
@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (game_started)
+        {
+            timer_duration += Time.deltaTime;
             return;
+        }
 
         if (timer_started)
         {
