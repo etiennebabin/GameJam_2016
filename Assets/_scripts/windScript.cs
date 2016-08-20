@@ -28,8 +28,8 @@ public class windScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //girouette_direction = girouette.transform.forward;
-        //wind_force = Vector3.Normalize(girouette_direction) * fBlowForce;
+        girouette_direction = girouette.transform.right;
+        wind_force = girouette_direction.normalized * fBlowForce * 2.5f;
 
         char1.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head1.transform.position);
         char2.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head2.transform.position);
