@@ -6,6 +6,7 @@ public class windScript : MonoBehaviour {
     public GameObject girouette;
     public GameObject char1, char2, char3;
     public float fBlowForce;
+    public float wind_multiplier;
 
 
     public GameObject wind_particles;
@@ -29,7 +30,7 @@ public class windScript : MonoBehaviour {
 	void Update ()
     {
         girouette_direction = girouette.transform.right;
-        wind_force = girouette_direction.normalized * fBlowForce * 2.5f;
+        wind_force = girouette_direction.normalized * fBlowForce * wind_multiplier;
 
         char1.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head1.transform.position);
         char2.GetComponent<Rigidbody>().AddForceAtPosition(wind_force, head2.transform.position);
@@ -46,7 +47,7 @@ public class windScript : MonoBehaviour {
         }
         else
         {
-            wind_particles.GetComponent<ParticleSystem>().playbackSpeed = wind_particles.GetComponent<ParticleSystem>().playbackSpeed <= 1.0f ? 1.0f : wind_particles.GetComponent<ParticleSystem>().playbackSpeed - 0.2f;
+            wind_particles.GetComponent<ParticleSystem>().playbackSpeed = wind_particles.GetComponent<ParticleSystem>().playbackSpeed <= 1.0f ? 1.0f : wind_particles.GetComponent<ParticleSystem>().playbackSpeed - 0.15f;
             fBlowForce = p_fBlowForce;
         }
 

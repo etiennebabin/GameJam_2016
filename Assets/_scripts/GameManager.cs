@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour {
 
         game_started = false;
         countdown_text = GetComponent<GUIText>();
-        countdown_text.text = "wait";
+        countdown_text.text = "join";
+        countdown_text.pixelOffset = new Vector2((Screen.width / 2),(Screen.height / 3));
     }
 	
 	// Update is called once per frame
@@ -56,8 +57,8 @@ public class GameManager : MonoBehaviour {
                 ++nb_active_players;
         }
 
-        Debug.Log("nb players :" + nb_players);
-        Debug.Log("nb active players :" + nb_active_players);
+        /*Debug.Log("nb players :" + nb_players);
+        Debug.Log("nb active players :" + nb_active_players);*/
 
         if (nb_players >= 2 && nb_players == nb_active_players)
         {
@@ -81,9 +82,14 @@ public class GameManager : MonoBehaviour {
     void UpdateTimer()
     {
         timer_duration -= Time.deltaTime;
-        Debug.Log(timer_duration);
+        //Debug.Log(timer_duration);
 
-        countdown_text.text = Mathf.Round(timer_duration).ToString();
+        string text = Mathf.Round(timer_duration).ToString();
+
+        if (text != "0")
+            countdown_text.text = text;
+        else
+            countdown_text.text = "";
 
         if (timer_duration < 0)
         {

@@ -38,7 +38,7 @@ public class CharController : MonoBehaviour {
             Vector3 stick_force = new Vector3(-5 * currentState.ThumbSticks.Left.X, 0.0f, -4 * currentState.ThumbSticks.Left.Y);
             body.AddForceAtPosition(stick_force, head.transform.position);
 
-            if(Vector3.Dot(this.transform.up, new Vector3(0.0f, 1.0f, 0.0f)) < 0.2f)
+            if(Vector3.Dot(this.transform.up, new Vector3(0.0f, 1.0f, 0.0f)) < 0.3f)
             {
                 SpringJoint[] springJoints = GetComponents<SpringJoint>();
                 foreach (SpringJoint joint in springJoints)
