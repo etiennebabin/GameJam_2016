@@ -9,7 +9,7 @@ public class MicInput : MonoBehaviour {
 
     public static float MicLoudness;
     private string _device;
-    private bool IsDebug = true;
+    private bool IsDebug = false;
 
     //mic initialization
     void InitMic()

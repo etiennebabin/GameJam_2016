@@ -7,10 +7,12 @@ public class CharController : MonoBehaviour {
     public PlayerIndex player_index;
     public GameObject char_light;
 
-    private bool char_activated = false;
+    public bool char_activated;
     private Rigidbody body;
     private Light char_spotlight;
     private GameObject head;
+
+    private GameManager game_man;
 
     // Use this for initialization
     void Start () {
@@ -21,17 +23,20 @@ public class CharController : MonoBehaviour {
         char_spotlight.enabled = false;
 
         head = this.transform.Find("Sphere").gameObject;
+        game_man = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         GamePadState currentState = GamePad.GetState(player_index);
 
-        if (char_activated)
+        if (char_activated && game_man.game_started)
         {
+
+            body.isKinematic = false;
+
             Vector3 stick_force = new Vector3(-5 * currentState.ThumbSticks.Left.X, 0.0f, -4 * currentState.ThumbSticks.Left.Y);
             body.AddForceAtPosition(stick_force, head.transform.position);
-            //body.AddForce(stick_force);
 
             if(Vector3.Dot(this.transform.up, new Vector3(0.0f, 1.0f, 0.0f)) < 0.2f)
             {
@@ -50,8 +55,8 @@ public class CharController : MonoBehaviour {
             if (currentState.Buttons.A == ButtonState.Pressed)
             {
                 char_activated = true;
-                body.isKinematic = false;
                 char_spotlight.enabled = true;
+                // remove "A" icon
             }
         }
 		

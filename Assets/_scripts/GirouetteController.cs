@@ -8,6 +8,8 @@ public class GirouetteController : MonoBehaviour {
     public GameObject wind_particles;
     private windScript wind_script;
 
+    public bool char_activated;
+
     // Use this for initialization
     void Start () {
         wind_particles = GameObject.Find("WindParticles");
@@ -23,5 +25,10 @@ public class GirouetteController : MonoBehaviour {
 
         // modify speed of wind by using the micro
         wind_script.ApplyForce(MicInput.MicLoudness);
+
+        if (!char_activated && GamePad.GetState(player_index).Buttons.A == ButtonState.Pressed)
+        {
+            char_activated = true;
+        }
     }
 }
