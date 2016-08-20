@@ -19,16 +19,19 @@ public class GirouetteController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // rotate girouette and wind
-        GamePadState currentState = GamePad.GetState(player_index);
-        this.transform.Rotate(new Vector3(0, -5 * currentState.ThumbSticks.Left.X, 0));
-        wind_particles.GetComponent<Transform>().transform.RotateAround(Vector3.zero, Vector3.up, -5 * currentState.ThumbSticks.Left.X);
-
+        if(char_activated)
+        {
+            GamePadState currentState = GamePad.GetState(player_index);
+            this.transform.Rotate(new Vector3(0, -5 * currentState.ThumbSticks.Left.X, 0));
+            wind_particles.GetComponent<Transform>().transform.RotateAround(Vector3.zero, Vector3.up, -5 * currentState.ThumbSticks.Left.X);
+        }
         // modify speed of wind by using the micro
         wind_script.ApplyForce(MicInput.MicLoudness);
 
         if (!char_activated && GamePad.GetState(player_index).Buttons.A == ButtonState.Pressed)
         {
             char_activated = true;
+            transform.Find("button_A").GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }
