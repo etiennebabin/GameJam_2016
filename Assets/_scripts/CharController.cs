@@ -56,8 +56,19 @@ public class CharController : MonoBehaviour {
             {
                 char_activated = true;
                 char_spotlight.enabled = true;
-                // remove "A" icon
+                transform.Find("button_A").GetComponent<MeshRenderer>().enabled = false;
             }
+            else if (game_man.game_started)
+            {
+                SpringJoint[] springJoints = GetComponents<SpringJoint>();
+                foreach (SpringJoint joint in springJoints)
+                {
+                    Destroy(joint);
+                }
+                body.isKinematic = false;
+                transform.Find("button_A").GetComponent<MeshRenderer>().enabled = false;
+            }
+
         }
 		
 		//Debug.Log (.ToString());
