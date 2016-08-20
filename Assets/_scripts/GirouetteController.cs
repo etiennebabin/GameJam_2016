@@ -5,13 +5,23 @@ using XInputDotNetPure;
 public class GirouetteController : MonoBehaviour {
 
     public PlayerIndex player_index;
+    public GameObject wind_particles;
+    private windScript wind_script;
 
     // Use this for initialization
     void Start () {
+        wind_particles = GameObject.Find("WindParticles");
+        wind_script = GetComponent<windScript>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        // rotate girouette and wind
         GamePadState currentState = GamePad.GetState(player_index);
+        this.transform.Rotate(new Vector3(0, -5 * currentState.ThumbSticks.Left.X, 0));
+        wind_particles.GetComponent<Transform>().transform.RotateAround(Vector3.zero, Vector3.up, -5 * currentState.ThumbSticks.Left.X);
+
+        // modify speed of wind by using the micro
+        wind_script.ApplyForce(MicInput.MicLoudness);
     }
 }
