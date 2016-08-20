@@ -26,12 +26,22 @@ public class GameManager : MonoBehaviour {
 
         game_started = false;
         countdown_text = GetComponent<GUIText>();
-        countdown_text.text = "join";
+        countdown_text.text = "Join";
         countdown_text.pixelOffset = new Vector2((Screen.width / 2),(Screen.height / 3));
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKey("escape"))
+        {
+            Application.Quit();
+            Debug.Log("You can't exit in debug mode");
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            Application.LoadLevel("scene");
+
+
         if (game_started)
         {
             timer_duration += Time.deltaTime;
