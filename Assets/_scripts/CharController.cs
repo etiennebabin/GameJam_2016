@@ -33,6 +33,17 @@ public class CharController : MonoBehaviour {
             body.AddForceAtPosition(stick_force, head.transform.position);
             //body.AddForce(stick_force);
 
+            if(Vector3.Dot(this.transform.up, new Vector3(0.0f, 1.0f, 0.0f)) < 0.2f)
+            {
+                SpringJoint[] springJoints = GetComponents<SpringJoint>();
+                foreach (SpringJoint joint in springJoints)
+                {
+                    Destroy(joint);
+                    char_activated = false;
+                }
+            }
+
+
         }
         else
         {
